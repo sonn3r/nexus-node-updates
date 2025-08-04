@@ -1,4 +1,4 @@
-import { execSync } from 'child_process';
+const { execSync } = require('child_process');
 
 function run(command: string): string {
   try {
@@ -49,16 +49,16 @@ function main() {
   console.log('Updating node...');
   updateNode();
 
-  console.log('Checking new version...');
+  console.log('Checking new version...");
   const versionAfter = getVersion();
 
-  console.log('Comparing versions...');
+  console.log('Comparing versions...");
   compareVersions(versionBefore, versionAfter);
 
-  console.log('Starting services again...');
+  console.log('Starting services again...");
   startServices();
 
-  console.log('Done!');
+  console.log('Done!");
 }
 
 main();
