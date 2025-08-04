@@ -2,22 +2,31 @@
 
 set -e
 
-# === 1. Install dependencies ===
-echo "Installing Node.js, npm and git..."
+echo "Installing Node.js, npm, and git..."
 sudo apt update
 sudo apt install -y nodejs npm git
 
-# === 2. Clone repo ===
-echo "Cloning GitHub repo..."
+echo "Cloning your repo..."
 cd /root
 rm -rf nexus-node-updates
 git clone https://github.com/sonn3r/nexus-node-updates.git
 cd nexus-node-updates
 
-# === 3. Install Node packages ===
 echo "Installing TypeScript and ts-node..."
 npm install --save-dev typescript ts-node @types/node
 
-# === 4. Run updater script ===
-echo "Running update script..."
+echo "🛠 Creating tsconfig.json..."
+cat <<EOF > tsconfig.json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  }
+}
+EOF
+
+echo "Running update-nexus.ts..."
 npx ts-node update-nexus.ts
