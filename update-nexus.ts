@@ -1,11 +1,11 @@
 const { execSync } = require('child_process');
 
-function run(command: string): string {
+function run(command) {
   try {
     const output = execSync(command, { stdio: 'pipe' }).toString().trim();
-    console.log(`Executed: ${command}`);
+    console.log(`✅ Executed: ${command}`);
     return output;
-  } catch (error: any) {
+  } catch (error) {
     console.error(`Error while executing: ${command}`);
     console.error(error.message);
     process.exit(1);
@@ -22,7 +22,7 @@ function startServices() {
   run('systemctl start nexus-node-2.service');
 }
 
-function getVersion(): string {
+function getVersion() {
   return run('/root/.nexus/bin/nexus-network version');
 }
 
@@ -30,7 +30,7 @@ function updateNode() {
   run('curl https://cli.nexus.xyz/ | sh');
 }
 
-function compareVersions(before: string, after: string) {
+function compareVersions(before, after) {
   if (before === after) {
     console.error(`Version did not change. Was: ${before}, now: ${after}`);
     process.exit(1);
@@ -46,19 +46,19 @@ function main() {
   console.log('Checking current version...');
   const versionBefore = getVersion();
 
-  console.log('Updating node...');
+  console.log('⬆Updating node...');
   updateNode();
 
-  console.log('Checking new version...");
+  console.log('Checking new version...');
   const versionAfter = getVersion();
 
-  console.log('Comparing versions...");
+  console.log('Comparing versions...');
   compareVersions(versionBefore, versionAfter);
 
-  console.log('Starting services again...");
+  console.log('Starting services again...');
   startServices();
 
-  console.log('Done!");
+  console.log('Done!');
 }
 
 main();
