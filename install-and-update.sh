@@ -10,8 +10,9 @@ sudo apt install -y nodejs npm git
 # === 2. Clone repo ===
 echo "Cloning GitHub repo..."
 cd /root
-git clone https://github.com/sonn3r/your-repo-name.git nexus-updater
-cd nexus-updater
+rm -rf nexus-node-updates
+git clone https://github.com/sonn3r/nexus-node-updates.git
+cd nexus-node-updates
 
 # === 3. Install Node packages ===
 echo "Installing TypeScript and ts-node..."
